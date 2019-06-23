@@ -1,10 +1,95 @@
+
 <!DOCTYPE html>
+{% from "macros.html" import input as input_mine %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My Blog</title>
+
 </head>
 <body>
+<p> post time: {{create_time | handle_time}}s</p>
+{% if username == 'zhiliao' %}
+<p> zhiliao class</p>
+{% else %}
+<p> not zhiliao class</p>
+{% endif %}
 
+<ul>
+    {% for user in users %}
+        <li> {{user}}</li>
+    {% endfor %}
+</ul>
+<table>
+    <thead>
+        <tr>
+            {% for key in person.keys() %}
+            <th>{{key}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for value in person.values() %}
+                <td>{{value}}</td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+<table border="1">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>bookName</th>
+            <th>author</th>
+            <th>price</th>
+        </tr>
+    </thead>
+    <tbody>
+
+            {% for book in books%}
+                {% if loop.first %}
+                <tr style="background:blue;">
+                    <td>{{loop.index0}}</td>
+                    <td>{{ book.name}}</td>
+                    <td>{{ book.author}}</td>
+                    <td>{{ book.price}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td>{{loop.index0}}</td>
+                    <td>{{ book.name}}</td>
+                    <td>{{ book.author}}</td>
+                    <td>{{ book.price}}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+
+    </tbody>
+</table>
+
+
+<h1>log in</h1>
+<table>
+    <tbody>
+        <tr>
+            <td>UserName:</td>
+            <td>{{input_mine('userName')}}</td>
+        </tr>
+        <tr>
+            <td>Passord:</td>
+            <td>{{input_mine('password',type='password')}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{input_mine('submit',value='submit',type='submit')}}</td>
+        </tr>
+    </tbody>
+</table>
+{% include "common/header.html" %}
+<div class="content">
+    This is middle part
+</div>
+{% include "common/footer.html" %}
 </body>
 </html>
